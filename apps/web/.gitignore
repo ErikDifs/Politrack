@@ -1,0 +1,39 @@
+# Dependencies
+/node_modules
+
+# Build outputs
+/build
+/dist
+/.svelte-kit
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+
+# Test & Coverage
+coverage/
+.vitest
+playwright-report/
+.nyc_output/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+.turbo/

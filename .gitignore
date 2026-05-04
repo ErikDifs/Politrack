@@ -1,0 +1,55 @@
+# Dependencies
+node_modules
+dist
+build
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Environment variables (NEVER commit API keys or secrets)
+.env
+.env.local
+.env.*.local
+.sandcastle/.env
+
+# Build outputs
+.svelte-kit
+.next
+out/
+*.tsbuildinfo
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# Test & Coverage
+coverage
+.vitest
+.playwright
+playwright-report/
+.nyc_output/
+
+# OS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Generated files
+*.generated.ts
+*.generated.js

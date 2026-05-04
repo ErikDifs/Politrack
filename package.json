@@ -1,0 +1,38 @@
+{
+  "name": "politracks-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @politracks/db build && pnpm --filter ./apps/web dev",
+    "build": "pnpm --filter @politracks/db build && pnpm --filter ./apps/web build",
+    "preview": "pnpm --filter ./apps/web preview",
+    "test": "pnpm --filter ./apps/web test && pnpm --filter ./packages/db test",
+    "test:e2e": "pnpm --filter ./apps/web test:e2e",
+    "typecheck": "pnpm --filter ./apps/web typecheck && pnpm --filter ./packages/db typecheck",
+    "lint": "eslint . --ext .js,.ts,.svelte && prettier --check .",
+    "format": "prettier --write . && eslint . --ext .js,.ts,.svelte --fix",
+    "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm test:e2e",
+    "db:generate": "pnpm --filter @politracks/db migrate:generate",
+    "db:migrate": "pnpm --filter @politracks/db migrate:execute",
+    "db:seed": "pnpm --filter @politracks/db seed",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:reset": "docker-compose down -v && docker-compose up -d",
+    "task:list": "node scripts/task-list.js",
+    "task:run": "node scripts/task-run.js",
+    "task:verify": "node scripts/task-verify.js",
+    "sandcastle": "npx tsx .sandcastle/main.ts"
+  },
+  "devDependencies": {
+    "@ai-hero/sandcastle": "^0.5.7",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-svelte": "^2.35.1",
+    "prettier": "^3.1.1",
+    "prettier-plugin-svelte": "^3.1.0",
+    "typescript": "^5.3.3",
+    "vite": "^6.4.2"
+  }
+}

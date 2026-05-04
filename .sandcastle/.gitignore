@@ -1,0 +1,24 @@
+# Secrets and API keys - NEVER commit
+.env
+.env.local
+*.pem
+*.key
+
+# Sandcastle runtime
+logs/
+worktrees/
+*.log
+
+# Build artifacts
+node_modules/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,45 @@
+{
+  "name": "@politracks/db",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./schema": {
+      "types": "./dist/schema.d.ts",
+      "default": "./dist/schema.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "test": "vitest",
+    "migrate:generate": "node scripts/generate-migration.js",
+    "migrate:execute": "node scripts/execute-migration.js",
+    "seed": "node scripts/seed.js",
+    "dev": "node --watch scripts/execute-migration.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.0",
+    "drizzle-orm": "^0.30.0",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.20.17",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  }
+}
