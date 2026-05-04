@@ -1,4 +1,4 @@
-import { run, claudeCode } from '@ai-hero/sandcastle';
+import { run, opencode } from '@ai-hero/sandcastle';
 import { docker } from '@ai-hero/sandcastle/sandboxes/docker';
 import { readFileSync } from 'fs';
 import { existsSync } from 'fs';
@@ -108,9 +108,7 @@ await run({
   // Sandbox provider — Docker is the default runtime.
   sandbox: docker(),
 
-  // The agent provider. Pass a model string to claudeCode() — claude-opus-4-6 for maximum
-  // capability. Can switch to claude-sonnet-4-20250514 for speed or claude-haiku-4-5-20251001 for faster iterations.
-  agent: claudeCode('claude-haiku-4-5-20251001'),
+  agent: opencode('opencode/nemotron-3-super-free'),
 
   // Combined prompt with all project context and task details
   prompt: combinedPrompt,
@@ -128,6 +126,4 @@ await run({
   // The onSandboxReady hook still runs npm install as a safety net to handle
   // platform-specific binaries and any packages added since the last copy.
   copyToWorktree: ['node_modules'],
-
-  // possible to add hook to push PR?
 });
