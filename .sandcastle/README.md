@@ -1,30 +1,55 @@
-# Sandcastle Configuration
+# Sandcastle Configuration for PoliTrack
 
-Sandcastle is an AI orchestration system for planning, implementing, reviewing, and merging changes.
-
-This configuration enables:
-
-- Planning mode: AI creates task plans with breakdown
-- Implementation mode: AI writes code following plans
-- Review mode: AI reviews code quality and tests
-- Merge mode: AI validates all checks pass before merge
+Sandcastle is an AI orchestration system for automating coding tasks using Claude Code (with Claude subscription).
 
 ## Setup
 
-All prompts are in this directory. Sandcastle reads them and applies context from:
+### 1. Generate Claude OAuth Token
 
-- `docs/PROJECT_CONTEXT.md` - Project overview
-- `docs/ARCHITECTURE.md` - Code structure
-- `AGENT_RULES.md` - Strict guidelines for agents
-- `docs/TASK_TEMPLATE.md` - Task structure requirements
+Run this command once to generate your OAuth token:
+
+```bash
+claude setup-token
+```
+
+Copy the token and add it to `.sandcastle/.env`:
+
+```
+CLAUDE_CODE_OAUTH_TOKEN=<your-token-here>
+GH_TOKEN=<your-github-token-here>
+```
+
+### 2. Configure GitHub Token
+
+Add your GitHub personal access token to `.env` (needs `repo` and `workflow` scopes).
 
 ## Usage
 
-Sandcastle will:
+Run Sandcastle with:
 
-1. Run planning-prompt.md to break down tasks
-2. Run implement-prompt.md to write code
-3. Run review-prompt.md to validate quality
-4. Run merge-prompt.md to confirm all checks pass
+```bash
+pnpm sandcastle
+```
 
-All work follows AGENT_RULES.md strictly.
+Or run directly:
+
+```bash
+npx tsx .sandcastle/main.ts
+```
+
+## Architecture
+
+- `main.ts` - Entry point that configures and runs the agent
+- `prompt.md` - System prompt for the Claude agent
+- `.env` - Configuration (OAuth token, GitHub token)
+- `tsconfig.json` - TypeScript configuration for Node.js runtime
+
+## How It Works
+
+1. Sandcastle initializes a Docker sandbox with your project
+2. Claude Code agent reads the prompt
+3. Agent processes tasks iteratively
+4. Changes are committed and verified
+5. Results are reported
+
+See `prompt.md` for task instructions.

@@ -1,4 +1,4 @@
-import { pgTable, text, serial, timestamp, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, text, serial, timestamp, boolean, integer, date } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
 export const users = pgTable('users', {
@@ -31,3 +31,25 @@ export const politicians = pgTable('politicians', {
 
 export type Politician = typeof politicians.$inferSelect;
 export type NewPolitician = typeof politicians.$inferInsert;
+
+export const eventTypes = ['vote', 'statement', 'donation', 'promise', 'missed_vote'] as const;
+
+export type AccountabilityEventType = (typeof eventTypes)[number];
+
+export const accountabilityEvents = pgTable('accountability_events', {
+  id: serial('id').primaryKey(),
+  politicianId: integer('politician_id')
+    .notNull()
+    .references(() => politicians.id),
+  type: text('type').$type<AccountabilityEventType>().notNull(),
+  title: text('title').notNull(),
+  date: date('date', { mode: 'string' }).notNull(),
+  description: text('description').notNull(),
+  sourceUrl: text('source_url').notNull(),
+  createdAt: timestamp('created_at')
+    .default(sql`now()`)
+    .notNull(),
+});
+
+export type AccountabilityEvent = typeof accountabilityEvents.$inferSelect;
+export type NewAccountabilityEvent = typeof accountabilityEvents.$inferInsert;

@@ -36,6 +36,44 @@
         <p class="mt-2 text-base text-gray-700">{data.politician.summary}</p>
       </div>
     </div>
+
+    <section class="border-t border-gray-200 pt-8">
+      <h2 class="text-2xl font-bold text-gray-900">Accountability Events</h2>
+
+      {#if data.events.length === 0}
+        <p class="mt-4 text-gray-600">No accountability events available.</p>
+      {:else}
+        <ol class="mt-6 space-y-6">
+          {#each data.events as event (event.id)}
+            <li data-testid="event-item" class="border-l-4 border-blue-200 pl-5">
+              <div class="flex flex-wrap items-center gap-3">
+                <span
+                  data-testid="event-type"
+                  class="rounded-full bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-700"
+                >
+                  {event.typeLabel}
+                </span>
+                <time datetime={event.date} class="text-sm font-medium text-gray-500">
+                  {event.date}
+                </time>
+              </div>
+
+              <h3 class="mt-3 text-lg font-semibold text-gray-900">{event.title}</h3>
+              <p class="mt-2 text-base text-gray-700">{event.description}</p>
+
+              <a
+                href={event.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                class="mt-3 inline-flex text-sm font-semibold text-blue-700 hover:text-blue-800"
+              >
+                View Source
+              </a>
+            </li>
+          {/each}
+        </ol>
+      {/if}
+    </section>
   </div>
 </div>
 

@@ -38,6 +38,7 @@ yarn-error.log*
 coverage
 .vitest
 .playwright
+test-results/
 playwright-report/
 .nyc_output/
 

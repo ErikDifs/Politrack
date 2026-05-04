@@ -215,4 +215,4 @@ test('display all event types correctly', async ({ page }) => {
 
 - [ ] Not started
 - [ ] In progress
-- [ ] Done
+- [x] Done

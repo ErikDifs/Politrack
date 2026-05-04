@@ -98,3 +98,8 @@ Fix failures and re-verify before attempting merge again.
 ## Single Source of Truth
 
 Merge decision = `pnpm verify` result
+
+- ✅ All pass → MERGE
+- ❌ Any fail → BLOCK
+
+No judgment calls. Binary decision.
